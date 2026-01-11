@@ -1,0 +1,572 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* 에코픽 녹색 기본 색상 */
+  --color-primary: #1B5E20;
+  --color-primary-light: #2E7D32;
+  --color-primary-dark: #0D3D13;
+  --radius: 0.625rem;
+
+  /* shadcn/ui 색상 시스템 */
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+
+  /* Primary를 에코픽 녹색으로 설정 */
+  --primary: oklch(0.4 0.14 145);
+  --primary-foreground: oklch(1 0 0);
+
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.4 0.14 145);
+
+  /* Chart 색상 */
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+
+  /* Sidebar 색상 */
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.4 0.14 145);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  /* Wanted Sans Variable 폰트 설정 */
+  --font-sans: 'Wanted Sans Variable', 'Pretendard Variable', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.45 0.14 145);
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.4 0.14 145);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-sans);
+  }
+}
+
+/* 계산기 슬라이더 커스텀 스타일 */
+.calc-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  background: #d1d5db;
+  border-radius: 3px;
+  outline: none;
+  cursor: pointer;
+}
+
+.calc-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  background: var(--color-primary);
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s;
+}
+
+.calc-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.1);
+}
+
+.calc-slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  background: var(--color-primary);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* 숫자 입력 스피너 제거 */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* ========================================
+   원본 CSS 애니메이션 복원
+   ======================================== */
+
+/* Cubic Bezier 변수 */
+:root {
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Keyframe 애니메이션 */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes scaleIn {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes marquee-left {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes marquee-right {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes chatbot-pulse {
+  0%, 100% {
+    box-shadow: 0 4px 20px rgba(27, 94, 32, 0.4);
+  }
+  50% {
+    box-shadow: 0 4px 30px rgba(27, 94, 32, 0.6), 0 0 0 8px rgba(27, 94, 32, 0.1);
+  }
+}
+
+/* Fade Up 스크롤 애니메이션 */
+.fade-up {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s var(--ease-out-expo),
+              transform 0.8s var(--ease-out-expo);
+}
+
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Scale Up 애니메이션 */
+.scale-up {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 0.6s var(--ease-out-expo),
+              transform 0.6s var(--ease-out-expo);
+}
+
+.scale-up.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* 애니메이션 딜레이 */
+.delay-1 { transition-delay: 0.1s; }
+.delay-2 { transition-delay: 0.2s; }
+.delay-3 { transition-delay: 0.3s; }
+.delay-4 { transition-delay: 0.4s; }
+.delay-5 { transition-delay: 0.5s; }
+
+/* Float 애니메이션 클래스 */
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-float-delay {
+  animation: float 6s ease-in-out infinite;
+  animation-delay: -3s;
+}
+
+/* Spin 애니메이션 */
+.animate-spin-slow {
+  animation: spin 8s linear infinite;
+}
+
+/* ========================================
+   버튼 스타일 복원
+   ======================================== */
+.btn-primary-enhanced {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s var(--ease-out-expo);
+}
+
+.btn-primary-enhanced::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.btn-primary-enhanced:hover::before {
+  left: 100%;
+}
+
+.btn-primary-enhanced:hover:not(:disabled) {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(27, 94, 32, 0.35);
+}
+
+/* ========================================
+   네비게이션 스타일 복원
+   ======================================== */
+.nav-link-enhanced {
+  position: relative;
+}
+
+.nav-link-enhanced::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--color-primary);
+  transition: width 0.3s ease;
+}
+
+.nav-link-enhanced:hover::after {
+  width: 100%;
+}
+
+/* ========================================
+   서비스 카드 스타일 복원
+   ======================================== */
+.service-card-enhanced {
+  transition: all 0.4s var(--ease-out-expo);
+  cursor: default;
+}
+
+.service-card-enhanced:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+}
+
+.service-icon-enhanced {
+  transition: all 0.3s ease;
+}
+
+.service-card-enhanced:hover .service-icon-enhanced {
+  background: var(--color-primary) !important;
+  color: white !important;
+  transform: scale(1.1) rotate(-5deg);
+}
+
+/* ========================================
+   프로세스 스텝 스타일 복원
+   ======================================== */
+.step-number-enhanced {
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.step-number-enhanced::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 2px solid var(--color-primary);
+  opacity: 0;
+  animation: pulse 2s infinite;
+}
+
+.step-number-enhanced:hover {
+  transform: scale(1.1);
+  box-shadow: 0 8px 24px rgba(27, 94, 32, 0.4);
+}
+
+/* ========================================
+   FAQ 스타일 복원
+   ======================================== */
+.faq-item-enhanced {
+  transition: all 0.3s ease;
+}
+
+.faq-item-enhanced:hover {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+}
+
+.faq-toggle-enhanced {
+  transition: transform 0.3s ease;
+}
+
+.faq-item-enhanced.open .faq-toggle-enhanced {
+  transform: rotate(45deg);
+}
+
+.faq-answer-enhanced {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s var(--ease-out-expo);
+}
+
+.faq-item-enhanced.open .faq-answer-enhanced {
+  max-height: 200px;
+}
+
+/* ========================================
+   히어로 이미지 스타일 복원
+   ======================================== */
+.hero-img-main {
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+  animation: float 6s ease-in-out infinite;
+}
+
+.hero-img-secondary {
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+  animation: float 6s ease-in-out infinite;
+  animation-delay: -3s;
+}
+
+.hero-badge-enhanced {
+  animation: float 6s ease-in-out infinite;
+  animation-delay: -1.5s;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+/* Before/After 슬라이더 */
+.before-after-slider {
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  animation: float 6s ease-in-out infinite;
+}
+
+/* ========================================
+   환경 섹션 스타일 복원
+   ======================================== */
+.environment-card-enhanced {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.environment-card-enhanced:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 40px rgba(46, 125, 50, 0.15);
+}
+
+/* ========================================
+   리뷰 마퀴 스타일 복원
+   ======================================== */
+.review-marquee-track-left {
+  animation: marquee-left 40s linear infinite;
+}
+
+.review-marquee-track-right {
+  animation: marquee-right 40s linear infinite;
+}
+
+.review-marquee:hover .review-marquee-track-left,
+.review-marquee:hover .review-marquee-track-right {
+  animation-play-state: paused;
+}
+
+.review-card-enhanced {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.review-card-enhanced:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* ========================================
+   챗봇 버튼 스타일 복원
+   ======================================== */
+.chatbot-button-enhanced {
+  animation: chatbot-pulse 2s infinite;
+  transition: all 0.3s var(--ease-out-expo);
+}
+
+.chatbot-button-enhanced:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 30px rgba(27, 94, 32, 0.5);
+}
+
+.chatbot-button-enhanced.active {
+  animation: none;
+}
+
+/* ========================================
+   푸터 링크 스타일 복원
+   ======================================== */
+.footer-link-enhanced {
+  transition: all 0.2s;
+}
+
+.footer-link-enhanced:hover {
+  color: white;
+  transform: translateX(4px);
+}
+
+/* ========================================
+   모달 애니메이션 복원
+   ======================================== */
+.modal-overlay-enhanced {
+  animation: fadeIn 0.3s ease;
+}
+
+.modal-content-enhanced {
+  animation: slideUp 0.4s var(--ease-out-expo);
+}
+
+/* 모달 닫기 버튼 */
+.modal-close-enhanced {
+  transition: all 0.2s ease;
+}
+
+.modal-close-enhanced:hover {
+  transform: rotate(90deg);
+}
+
+/* ========================================
+   히어로 하이라이트 텍스트
+   ======================================== */
+.hero-highlight {
+  position: relative;
+  display: inline-block;
+}
+
+.hero-highlight::after {
+  content: '';
+  position: absolute;
+  bottom: 4px;
+  left: 0;
+  width: 100%;
+  height: 12px;
+  background: rgba(27, 94, 32, 0.15);
+  z-index: -1;
+  border-radius: 4px;
+}
+
+/* ========================================
+   CTA 버튼 화살표 애니메이션
+   ======================================== */
+.btn-arrow {
+  transition: transform 0.3s ease;
+}
+
+.btn-animated:hover .btn-arrow {
+  transform: translateX(4px);
+}
