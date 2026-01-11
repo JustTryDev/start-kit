@@ -1,0 +1,19 @@
+#바이브 코딩 세팅 과정 (Window 기준)
+## 1. Git 설치 (https://git-scm.com/install/windows)
+
+## 2. Node.js (https://nodejs.org/ko/download)
+
+## 3. 에디터 설치
+⦁ Cursor (https://cursor.com)
+⦁ VS Code (https://code.visualstudio.com)
+⦁ Antigravity (https://antigravity.google)
+
+## 4. Claude code 설치 (https://code.claude.com/docs/ko/overview#macos%2Flinux)
+### 4-1. 명령어(CMD 또는 Powershell로 실행) : npm install -g @anthropic-ai/claude-code
+### 4-2. 환경 변수 설정 (Path)
+
+## 5. 에디터 익스텍션 설치
+⦁ Claude code
+⦁ Live Server
+⦁ Korean Language
+⦁ Figma
